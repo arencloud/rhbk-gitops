@@ -10,6 +10,7 @@ spec:
   db:
     vendor: postgres
     host: '192.168.10.12'
+    database: rhbk-dev
     usernameSecret:
       name: rhbk-pgsql-backend-creds
       key: username
