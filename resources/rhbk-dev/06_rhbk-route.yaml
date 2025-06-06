@@ -1,0 +1,24 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: rhbk
+  namespace: rhbk
+  annotations:
+    argocd.argoproj.io/sync-wave: "7"
+  labels:
+    app: keycloak
+    app.kubernetes.io/instance: rhbk-development
+    app.kubernetes.io/managed-by: rhbk-operator
+spec:
+  to:
+    kind: Service
+    name: rhbk-dev-service
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+    certificate: ''
+    key: ''
+    caCertificate: ''
+    destinationCACertificate: ''
+  port:
+    targetPort: https

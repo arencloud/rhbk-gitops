@@ -1,0 +1,23 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+  name: rhbk-dev
+  namespace: rhbk
+spec:
+  instances: 1
+  db:
+    vendor: postgres
+    host: '192.168.10.12'
+    usernameSecret:
+      name: rhbk-pgsql-backend-creds
+      key: username
+    passwordSecret:
+      name: rhbk-pgsql-backend-creds
+      key: password
+  http:
+    httpEnabled: true
+    tlsSecret: rhbk-cert
+  hostname:
+    hostname: rhbk.apps.acm.tor.arencloud.com

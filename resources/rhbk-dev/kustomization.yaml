@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1
+kind: Kustomization
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+resources:
+  - 00_rhbk-namespace.yaml
+  - 01_rhbk-operatorgroup.yaml
+  - 02_rhbk-subscription.yaml
+  - 03_pgsql-credentials.yaml
+  - 04_rhbk-cert.yaml
+  - 05_rhbk.yaml
+# - 06_rhbk-route.yaml

@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+  labels:
+    app: cert-manager
+  name: rhbk-cert
+  namespace: rhbk
+spec:
+  commonName: 'rhbk.apps.acm.tor.arencloud.com'
+  dnsNames:
+    - 'rhbk.apps.acm.tor.arencloud.com'
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: prod
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    rotationPolicy: Always
+    size: 2048
+  renewBefore: 360h
+  secretName: router-certs
+  secretTemplate:
+    labels:
+      app: cert-manager
+  subject:
+    organizations:
+      - ArenCloud
+  usages:
+    - server auth
+    - client auth
