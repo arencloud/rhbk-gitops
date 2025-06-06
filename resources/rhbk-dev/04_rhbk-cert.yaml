@@ -21,7 +21,7 @@ spec:
     rotationPolicy: Always
     size: 2048
   renewBefore: 360h
-  secretName: router-certs
+  secretName: rhbk-cert
   secretTemplate:
     labels:
       app: cert-manager
