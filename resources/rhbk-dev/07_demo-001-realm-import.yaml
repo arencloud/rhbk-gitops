@@ -555,9 +555,9 @@ spec:
         clientId: ocp
         name: OpenShift Purposes
         description: OpenShift clusters authenticators
-        rootUrl: 'https://example.com'
-        adminUrl: 'https://example.com'
-        baseUrl: 'https://example.com'
+        rootUrl: 'https://demo.example.com'
+        adminUrl: 'https://demo.example.com'
+        baseUrl: 'https://demo.example.com'
         surrogateAuthRequired: false
         enabled: true
         alwaysDisplayInConsole: false
