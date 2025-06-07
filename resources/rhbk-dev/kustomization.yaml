@@ -10,3 +10,4 @@ resources:
   - 04_rhbk-cert.yaml
   - 05_rhbk.yaml
 # - 06_rhbk-route.yaml
+  - 07_demo-001-realm-import.yaml

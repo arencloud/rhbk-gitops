@@ -1,0 +1,2028 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealmImport
+metadata:
+  name: demo-001-realm-import
+  namespace: rhbk
+  annotations:
+    argocd.argoproj.io/sync-wave: "8"
+spec:
+  keycloakCRName: rhbk-dev
+  realm:
+    id: c423f994-0842-49dd-8499-378f709ee860
+    realm: demo-001
+    notBefore: 0
+    defaultSignatureAlgorithm: RS256
+    revokeRefreshToken: false
+    refreshTokenMaxReuse: 0
+    accessTokenLifespan: 300
+    accessTokenLifespanForImplicitFlow: 900
+    ssoSessionIdleTimeout: 1800
+    ssoSessionMaxLifespan: 36000
+    ssoSessionIdleTimeoutRememberMe: 0
+    ssoSessionMaxLifespanRememberMe: 0
+    offlineSessionIdleTimeout: 2592000
+    offlineSessionMaxLifespanEnabled: false
+    offlineSessionMaxLifespan: 5184000
+    clientSessionIdleTimeout: 0
+    clientSessionMaxLifespan: 0
+    clientOfflineSessionIdleTimeout: 0
+    clientOfflineSessionMaxLifespan: 0
+    accessCodeLifespan: 60
+    accessCodeLifespanUserAction: 300
+    accessCodeLifespanLogin: 1800
+    actionTokenGeneratedByAdminLifespan: 43200
+    actionTokenGeneratedByUserLifespan: 300
+    oauth2DeviceCodeLifespan: 600
+    oauth2DevicePollingInterval: 5
+    enabled: true
+    sslRequired: external
+    registrationAllowed: false
+    registrationEmailAsUsername: false
+    rememberMe: false
+    verifyEmail: false
+    loginWithEmailAllowed: true
+    duplicateEmailsAllowed: false
+    resetPasswordAllowed: false
+    editUsernameAllowed: false
+    bruteForceProtected: false
+    permanentLockout: false
+    maxTemporaryLockouts: 0
+    bruteForceStrategy: MULTIPLE
+    maxFailureWaitSeconds: 900
+    minimumQuickLoginWaitSeconds: 60
+    waitIncrementSeconds: 60
+    quickLoginCheckMilliSeconds: 1000
+    maxDeltaTimeSeconds: 43200
+    failureFactor: 30
+    roles:
+      realm:
+        - id: e4073bff-352e-4fb7-8112-577a624ec013
+          name: offline_access
+          description: '${role_offline-access}'
+          composite: false
+          clientRole: false
+          containerId: c423f994-0842-49dd-8499-378f709ee860
+          attributes: { }
+        - id: ca07203e-efe2-4e06-883a-7c7aa1e822ae
+          name: default-roles-demo-001
+          description: '${role_default-roles}'
+          composite: true
+          composites:
+            realm:
+              - offline_access
+              - uma_authorization
+            client:
+              account:
+                - view-profile
+                - manage-account
+          clientRole: false
+          containerId: c423f994-0842-49dd-8499-378f709ee860
+          attributes: { }
+        - id: 04ff94c4-0653-49bb-86be-8df5cbd76c3f
+          name: uma_authorization
+          description: '${role_uma_authorization}'
+          composite: false
+          clientRole: false
+          containerId: c423f994-0842-49dd-8499-378f709ee860
+          attributes: { }
+      client:
+        realm-management:
+          - id: ebe2f57a-0087-4d39-ba5b-e69677d443b8
+            name: manage-authorization
+            description: '${role_manage-authorization}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 9a3bc52a-2f51-46e0-bfdd-05174df58b7f
+            name: realm-admin
+            description: '${role_realm-admin}'
+            composite: true
+            composites:
+              client:
+                realm-management:
+                  - manage-authorization
+                  - manage-clients
+                  - query-realms
+                  - view-clients
+                  - create-client
+                  - view-events
+                  - query-groups
+                  - view-identity-providers
+                  - query-users
+                  - view-authorization
+                  - manage-events
+                  - manage-realm
+                  - view-realm
+                  - impersonation
+                  - manage-users
+                  - query-clients
+                  - view-users
+                  - manage-identity-providers
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 7012d659-c5cc-4aa4-9845-32e55590da15
+            name: manage-clients
+            description: '${role_manage-clients}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: a775fcfd-abdd-456f-b211-3cda2d0f0bbc
+            name: query-realms
+            description: '${role_query-realms}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: c9afa022-56f9-48e4-a2f0-d29bc52bd1d7
+            name: view-clients
+            description: '${role_view-clients}'
+            composite: true
+            composites:
+              client:
+                realm-management:
+                  - query-clients
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: e9999305-94b9-4a05-a617-5813ba667d77
+            name: create-client
+            description: '${role_create-client}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: ad614fce-0526-4a60-94d1-9de1738fcedb
+            name: view-events
+            description: '${role_view-events}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: e9f9acbe-4f37-49bb-8ba9-d22dfbbbb3ba
+            name: query-groups
+            description: '${role_query-groups}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 8f1acecf-3292-4168-bc8b-846578ed991b
+            name: query-users
+            description: '${role_query-users}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 438b989b-d3e9-4fdc-b97b-e7e50d05f135
+            name: view-identity-providers
+            description: '${role_view-identity-providers}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: d238633a-0ec6-426e-a09f-3da7fb85febc
+            name: view-authorization
+            description: '${role_view-authorization}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: f4a81c66-21f4-40ea-a173-855f1225ebb0
+            name: manage-events
+            description: '${role_manage-events}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 636418e1-3e74-4e90-95a8-1cefd4243226
+            name: manage-realm
+            description: '${role_manage-realm}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 9742c69c-a323-4fc1-8fd6-6b17c4b43ceb
+            name: impersonation
+            description: '${role_impersonation}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: e1dc1884-4cca-4714-9110-daef1b5b9e1a
+            name: view-realm
+            description: '${role_view-realm}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: fa8ed451-b468-4153-b4b9-73eb7f92da88
+            name: manage-users
+            description: '${role_manage-users}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: ca4699ba-1a52-4c16-b006-b83471ff5c6f
+            name: query-clients
+            description: '${role_query-clients}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: 0a846907-5fa8-4ec2-a522-f4adf3e11026
+            name: view-users
+            description: '${role_view-users}'
+            composite: true
+            composites:
+              client:
+                realm-management:
+                  - query-groups
+                  - query-users
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+          - id: a55840ad-60e0-4eb9-ac08-32a7bba1483d
+            name: manage-identity-providers
+            description: '${role_manage-identity-providers}'
+            composite: false
+            clientRole: true
+            containerId: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+            attributes: { }
+        security-admin-console: [ ]
+        admin-cli: [ ]
+        account-console: [ ]
+        broker:
+          - id: 1ec93016-ed6c-4d3f-80a2-6b63ed93115c
+            name: read-token
+            description: '${role_read-token}'
+            composite: false
+            clientRole: true
+            containerId: 85999698-5517-4b64-8fa2-6d5545da1ffd
+            attributes: { }
+        ocp: [ ]
+        account:
+          - id: 910a287d-7041-4a9a-9497-d8f1f52a7773
+            name: view-applications
+            description: '${role_view-applications}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: 413a7e84-9e68-48a5-86d8-eeb4703b676b
+            name: view-groups
+            description: '${role_view-groups}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: e157ab82-538f-4996-a28b-121e565a8f2d
+            name: delete-account
+            description: '${role_delete-account}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: a615047d-c0d9-4535-a9cf-40fa6527a071
+            name: view-consent
+            description: '${role_view-consent}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: cc4245ff-43cd-421c-9929-6696335b8622
+            name: view-profile
+            description: '${role_view-profile}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: f0e1f466-2bbe-47bf-bf22-2839aa336653
+            name: manage-account
+            description: '${role_manage-account}'
+            composite: true
+            composites:
+              client:
+                account:
+                  - manage-account-links
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: 3b67e5af-711f-4e8a-aae6-ea263fc77207
+            name: manage-consent
+            description: '${role_manage-consent}'
+            composite: true
+            composites:
+              client:
+                account:
+                  - view-consent
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+          - id: 9754900a-0a79-4231-8d1e-208ce82915a1
+            name: manage-account-links
+            description: '${role_manage-account-links}'
+            composite: false
+            clientRole: true
+            containerId: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+            attributes: { }
+    groups: [ ]
+    defaultRole:
+      id: ca07203e-efe2-4e06-883a-7c7aa1e822ae
+      name: default-roles-demo-001
+      description: '${role_default-roles}'
+      composite: true
+      clientRole: false
+      containerId: c423f994-0842-49dd-8499-378f709ee860
+    requiredCredentials:
+      - password
+    otpPolicyType: totp
+    otpPolicyAlgorithm: HmacSHA1
+    otpPolicyInitialCounter: 0
+    otpPolicyDigits: 6
+    otpPolicyLookAheadWindow: 1
+    otpPolicyPeriod: 30
+    otpPolicyCodeReusable: false
+    otpSupportedApplications:
+      - totpAppFreeOTPName
+      - totpAppGoogleName
+      - totpAppMicrosoftAuthenticatorName
+    localizationTexts: { }
+    webAuthnPolicyRpEntityName: keycloak
+    webAuthnPolicySignatureAlgorithms:
+      - ES256
+      - RS256
+    webAuthnPolicyRpId: ''
+    webAuthnPolicyAttestationConveyancePreference: not specified
+    webAuthnPolicyAuthenticatorAttachment: not specified
+    webAuthnPolicyRequireResidentKey: not specified
+    webAuthnPolicyUserVerificationRequirement: not specified
+    webAuthnPolicyCreateTimeout: 0
+    webAuthnPolicyAvoidSameAuthenticatorRegister: false
+    webAuthnPolicyAcceptableAaguids: [ ]
+    webAuthnPolicyExtraOrigins: [ ]
+    webAuthnPolicyPasswordlessRpEntityName: keycloak
+    webAuthnPolicyPasswordlessSignatureAlgorithms:
+      - ES256
+      - RS256
+    webAuthnPolicyPasswordlessRpId: ''
+    webAuthnPolicyPasswordlessAttestationConveyancePreference: not specified
+    webAuthnPolicyPasswordlessAuthenticatorAttachment: not specified
+    webAuthnPolicyPasswordlessRequireResidentKey: not specified
+    webAuthnPolicyPasswordlessUserVerificationRequirement: not specified
+    webAuthnPolicyPasswordlessCreateTimeout: 0
+    webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister: false
+    webAuthnPolicyPasswordlessAcceptableAaguids: [ ]
+    webAuthnPolicyPasswordlessExtraOrigins: [ ]
+    scopeMappings:
+      - clientScope: offline_access
+        roles:
+          - offline_access
+    clientScopeMappings:
+      account:
+        - client: account-console
+          roles:
+            - manage-account
+            - view-groups
+    clients:
+      - id: 2a5def4a-5455-4ce4-8777-b29d2fb1de0d
+        clientId: account
+        name: '${client_account}'
+        rootUrl: '${authBaseUrl}'
+        baseUrl: /realms/demo-001/account/
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris:
+          - /realms/demo-001/account/*
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: true
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'false'
+          post.logout.redirect.uris: +
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: false
+        nodeReRegistrationTimeout: 0
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: e0b6fd21-59d9-4220-8781-0a7891d61e93
+        clientId: account-console
+        name: '${client_account-console}'
+        rootUrl: '${authBaseUrl}'
+        baseUrl: /realms/demo-001/account/
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris:
+          - /realms/demo-001/account/*
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: true
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'false'
+          post.logout.redirect.uris: +
+          pkce.code.challenge.method: S256
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: false
+        nodeReRegistrationTimeout: 0
+        protocolMappers:
+          - id: e3610361-16c6-4e0b-95a0-e65f4b664a57
+            name: audience resolve
+            protocol: openid-connect
+            protocolMapper: oidc-audience-resolve-mapper
+            consentRequired: false
+            config: { }
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: decd0d65-1bdd-44f7-8a95-ca76af096c24
+        clientId: admin-cli
+        name: '${client_admin-cli}'
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris: [ ]
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: false
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: true
+        serviceAccountsEnabled: false
+        publicClient: true
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'false'
+          client.use.lightweight.access.token.enabled: 'true'
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: 0
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: 85999698-5517-4b64-8fa2-6d5545da1ffd
+        clientId: broker
+        name: '${client_broker}'
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris: [ ]
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: true
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: false
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'true'
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: false
+        nodeReRegistrationTimeout: 0
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: 52f476f5-138e-4805-92b9-c569d8fb1ea9
+        clientId: ocp
+        name: OpenShift Purposes
+        description: OpenShift clusters authenticators
+        rootUrl: 'https://example.com'
+        adminUrl: 'https://example.com'
+        baseUrl: 'https://example.com'
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        secret: '**********'
+        redirectUris:
+          - '*'
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: false
+        frontchannelLogout: true
+        protocol: openid-connect
+        attributes:
+          realm_client: 'false'
+          oidc.ciba.grant.enabled: 'false'
+          client.secret.creation.time: '1749247786'
+          backchannel.logout.session.required: 'true'
+          standard.token.exchange.enabled: 'false'
+          oauth2.device.authorization.grant.enabled: 'false'
+          backchannel.logout.revoke.offline.tokens: 'false'
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: -1
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: c9db50c1-5cb1-40d2-a9bb-d060b0e5b020
+        clientId: realm-management
+        name: '${client_realm-management}'
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris: [ ]
+        webOrigins: [ ]
+        notBefore: 0
+        bearerOnly: true
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: false
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'true'
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: false
+        nodeReRegistrationTimeout: 0
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+      - id: e905dca8-29eb-472f-a306-91a7c76ab855
+        clientId: security-admin-console
+        name: '${client_security-admin-console}'
+        rootUrl: '${authAdminUrl}'
+        baseUrl: /admin/demo-001/console/
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        redirectUris:
+          - /admin/demo-001/console/*
+        webOrigins:
+          - +
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        publicClient: true
+        frontchannelLogout: false
+        protocol: openid-connect
+        attributes:
+          realm_client: 'false'
+          client.use.lightweight.access.token.enabled: 'true'
+          post.logout.redirect.uris: +
+          pkce.code.challenge.method: S256
+        authenticationFlowBindingOverrides: { }
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: 0
+        protocolMappers:
+          - id: 0ba91357-fe32-4e66-8fbf-c31e0d004eaf
+            name: locale
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: locale
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: locale
+              jsonType.label: String
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - basic
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - organization
+          - offline_access
+          - microprofile-jwt
+    clientScopes:
+      - id: 0e52067f-b874-4b0a-86e0-7aafb65ff038
+        name: saml_organization
+        description: Organization Membership
+        protocol: saml
+        attributes:
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: 374096b7-742d-4fc2-842d-921c1bfa1e75
+            name: organization
+            protocol: saml
+            protocolMapper: saml-organization-membership-mapper
+            consentRequired: false
+            config: { }
+      - id: 1d449c79-5fd8-42d7-a4b4-3ab4043da08a
+        name: phone
+        description: 'OpenID Connect built-in scope: phone'
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          consent.screen.text: '${phoneScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: 414fc630-325e-495f-9334-8c762ec5e8a2
+            name: phone number
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: phoneNumber
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: phone_number
+              jsonType.label: String
+          - id: 7a6c7275-e477-4b8b-b842-97dc07a5add7
+            name: phone number verified
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: phoneNumberVerified
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: phone_number_verified
+              jsonType.label: boolean
+      - id: c89f6383-0fa2-401f-b410-552008312b2a
+        name: profile
+        description: 'OpenID Connect built-in scope: profile'
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          consent.screen.text: '${profileScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: 776eea3c-9be5-45fb-8608-7a7c97727430
+            name: username
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: username
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: preferred_username
+              jsonType.label: String
+          - id: e8c2287b-a6cb-4a10-9001-09897fb4414c
+            name: locale
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: locale
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: locale
+              jsonType.label: String
+          - id: 34a28be4-ce58-4bab-8143-add395060ee2
+            name: picture
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: picture
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: picture
+              jsonType.label: String
+          - id: a7011d8d-8385-424a-8bfa-14df433c17de
+            name: website
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: website
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: website
+              jsonType.label: String
+          - id: da1b5702-7f4a-407e-a426-a3d5f47d6cf2
+            name: updated at
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: updatedAt
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: updated_at
+              jsonType.label: long
+          - id: 355b4629-81ef-48f5-bea4-ee8cdaf57b43
+            name: nickname
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: nickname
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: nickname
+              jsonType.label: String
+          - id: c47ef8ed-d68d-4e26-98f0-acf4a7ae1d2b
+            name: middle name
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: middleName
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: middle_name
+              jsonType.label: String
+          - id: c46f3709-5617-43d4-9f46-6db6a988f1f9
+            name: zoneinfo
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: zoneinfo
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: zoneinfo
+              jsonType.label: String
+          - id: 89cfe7c0-0f31-4bfe-8243-fc3d81b15e12
+            name: family name
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: lastName
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: family_name
+              jsonType.label: String
+          - id: b7feafb7-513e-4182-a47c-31506eb356db
+            name: given name
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: firstName
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: given_name
+              jsonType.label: String
+          - id: 0ea72338-6ac0-46f2-955b-a7b933afcfe8
+            name: birthdate
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: birthdate
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: birthdate
+              jsonType.label: String
+          - id: 6639e654-9062-4a1f-91ee-fa92bf297bad
+            name: full name
+            protocol: openid-connect
+            protocolMapper: oidc-full-name-mapper
+            consentRequired: false
+            config:
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              userinfo.token.claim: 'true'
+          - id: 8fc3fabe-7326-498a-9c0b-950c8d288e85
+            name: profile
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: profile
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: profile
+              jsonType.label: String
+          - id: 81f91f7e-d687-4269-9b64-d78ef9e1426f
+            name: gender
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: gender
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: gender
+              jsonType.label: String
+      - id: 31fbb9c3-867b-44f5-b552-f499b4a6bd62
+        name: service_account
+        description: Specific scope for a client enabled for service accounts
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'false'
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: 0ec7efc2-5182-4c65-8499-f5a5d5f9a422
+            name: Client ID
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: client_id
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: client_id
+              jsonType.label: String
+          - id: 77f189e6-a807-4abb-904f-945df90e4cfe
+            name: Client IP Address
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: clientAddress
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: clientAddress
+              jsonType.label: String
+          - id: ee47be3b-1ea2-400f-acce-82f81b3e1558
+            name: Client Host
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: clientHost
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: clientHost
+              jsonType.label: String
+      - id: c13cab7d-950e-443b-b5f3-0a075ae78c60
+        name: roles
+        description: OpenID Connect scope for add user roles to the access token
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'false'
+          consent.screen.text: '${rolesScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: f5337df7-9fa3-4ed1-b0f0-0db9e59ff3ed
+            name: client roles
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-client-role-mapper
+            consentRequired: false
+            config:
+              user.attribute: foo
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: 'resource_access.${client_id}.roles'
+              jsonType.label: String
+              multivalued: 'true'
+          - id: 0629ee73-a379-4479-9f73-5e34b63cc35b
+            name: realm roles
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-realm-role-mapper
+            consentRequired: false
+            config:
+              user.attribute: foo
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: realm_access.roles
+              jsonType.label: String
+              multivalued: 'true'
+          - id: 33306424-6c09-4486-b671-c17c6a01dd93
+            name: audience resolve
+            protocol: openid-connect
+            protocolMapper: oidc-audience-resolve-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+      - id: c8c2b089-7245-4590-90b4-e456c707ebb8
+        name: address
+        description: 'OpenID Connect built-in scope: address'
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          consent.screen.text: '${addressScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: 57ccd7c2-58fc-42eb-b59e-524846f3544d
+            name: address
+            protocol: openid-connect
+            protocolMapper: oidc-address-mapper
+            consentRequired: false
+            config:
+              user.attribute.formatted: formatted
+              user.attribute.country: country
+              introspection.token.claim: 'true'
+              user.attribute.postal_code: postal_code
+              userinfo.token.claim: 'true'
+              user.attribute.street: street
+              id.token.claim: 'true'
+              user.attribute.region: region
+              access.token.claim: 'true'
+              user.attribute.locality: locality
+      - id: f326102d-7b28-412e-b014-ea5d76c1edb4
+        name: organization
+        description: Additional claims about the organization a subject belongs to
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          consent.screen.text: '${organizationScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: e2c30ae4-8a57-4471-846b-1d719745086a
+            name: organization
+            protocol: openid-connect
+            protocolMapper: oidc-organization-membership-mapper
+            consentRequired: false
+            config:
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: organization
+              jsonType.label: String
+              multivalued: 'true'
+      - id: 834d4702-8399-4121-b82b-d522c6433637
+        name: role_list
+        description: SAML role list
+        protocol: saml
+        attributes:
+          consent.screen.text: '${samlRoleListScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: 8a40697e-7114-435c-bc05-cb43b256b14e
+            name: role list
+            protocol: saml
+            protocolMapper: saml-role-list-mapper
+            consentRequired: false
+            config:
+              single: 'false'
+              attribute.nameformat: Basic
+              attribute.name: Role
+      - id: 689ec990-8bac-4d5e-9ca7-0a56637a39fe
+        name: microprofile-jwt
+        description: Microprofile - JWT built-in scope
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: 44a2106d-dab9-4e12-9f84-98411822feb1
+            name: groups
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-realm-role-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              multivalued: 'true'
+              user.attribute: foo
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: groups
+              jsonType.label: String
+          - id: 578cdfd3-d34f-4907-a667-0513a5412db5
+            name: upn
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: username
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: upn
+              jsonType.label: String
+      - id: cb678a3f-fbbd-4f58-aa60-d657cd501bea
+        name: email
+        description: 'OpenID Connect built-in scope: email'
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          consent.screen.text: '${emailScopeConsentText}'
+          display.on.consent.screen: 'true'
+        protocolMappers:
+          - id: c5a44a52-b12d-4e10-b7c8-217fb6058e55
+            name: email verified
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-property-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: emailVerified
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: email_verified
+              jsonType.label: boolean
+          - id: 5bdbd584-0ea3-4aa8-9a02-b825ab4b5a77
+            name: email
+            protocol: openid-connect
+            protocolMapper: oidc-usermodel-attribute-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              user.attribute: email
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: email
+              jsonType.label: String
+      - id: b393c262-6bcd-4980-9794-087265a8292b
+        name: web-origins
+        description: OpenID Connect scope for add allowed web origins to the access token
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'false'
+          consent.screen.text: ''
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: e9deea94-b6dd-4ac9-9e43-cf802ea13a5e
+            name: allowed web origins
+            protocol: openid-connect
+            protocolMapper: oidc-allowed-origins-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+      - id: 57a1cae9-7fdb-4c77-a1e2-47c2c7491c63
+        name: offline_access
+        description: 'OpenID Connect built-in scope: offline_access'
+        protocol: openid-connect
+        attributes:
+          consent.screen.text: '${offlineAccessScopeConsentText}'
+          display.on.consent.screen: 'true'
+      - id: 7398c5fc-0d84-400e-9217-7f63e3d8b6ee
+        name: acr
+        description: >-
+          OpenID Connect scope for add acr (authentication context class reference)
+          to the token
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'false'
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: c13ca65f-8da2-4ee7-ad4d-afce6227f2e9
+            name: acr loa level
+            protocol: openid-connect
+            protocolMapper: oidc-acr-mapper
+            consentRequired: false
+            config:
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+      - id: 17468175-03b4-43cd-bc6a-002c0e9bdd1d
+        name: basic
+        description: OpenID Connect scope for add all basic claims to the token
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'false'
+          display.on.consent.screen: 'false'
+        protocolMappers:
+          - id: 3adafe40-fa1e-4a9d-b092-7124e890a6ad
+            name: auth_time
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: AUTH_TIME
+              id.token.claim: 'true'
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: auth_time
+              jsonType.label: long
+          - id: 2f3b407d-753f-4694-bd69-3a10225755be
+            name: sub
+            protocol: openid-connect
+            protocolMapper: oidc-sub-mapper
+            consentRequired: false
+            config:
+              introspection.token.claim: 'true'
+              access.token.claim: 'true'
+    defaultDefaultClientScopes:
+      - role_list
+      - saml_organization
+      - profile
+      - email
+      - roles
+      - web-origins
+      - acr
+      - basic
+    defaultOptionalClientScopes:
+      - offline_access
+      - address
+      - phone
+      - microprofile-jwt
+      - organization
+    browserSecurityHeaders:
+      contentSecurityPolicyReportOnly: ''
+      xContentTypeOptions: nosniff
+      referrerPolicy: no-referrer
+      xRobotsTag: none
+      xFrameOptions: SAMEORIGIN
+      contentSecurityPolicy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';
+      strictTransportSecurity: max-age=31536000; includeSubDomains
+    smtpServer: { }
+    eventsEnabled: true
+    eventsExpiration: 86400
+    eventsListeners:
+      - jboss-logging
+    enabledEventTypes:
+      - UPDATE_CONSENT_ERROR
+      - SEND_RESET_PASSWORD
+      - GRANT_CONSENT
+      - VERIFY_PROFILE_ERROR
+      - UPDATE_TOTP
+      - REMOVE_TOTP
+      - REVOKE_GRANT
+      - LOGIN_ERROR
+      - CLIENT_LOGIN
+      - RESET_PASSWORD_ERROR
+      - UPDATE_CREDENTIAL
+      - IMPERSONATE_ERROR
+      - CODE_TO_TOKEN_ERROR
+      - CUSTOM_REQUIRED_ACTION
+      - OAUTH2_DEVICE_CODE_TO_TOKEN_ERROR
+      - RESTART_AUTHENTICATION
+      - UPDATE_PROFILE_ERROR
+      - IMPERSONATE
+      - LOGIN
+      - UPDATE_PASSWORD_ERROR
+      - OAUTH2_DEVICE_VERIFY_USER_CODE
+      - CLIENT_INITIATED_ACCOUNT_LINKING
+      - USER_DISABLED_BY_PERMANENT_LOCKOUT
+      - OAUTH2_EXTENSION_GRANT
+      - REMOVE_CREDENTIAL_ERROR
+      - TOKEN_EXCHANGE
+      - REGISTER
+      - LOGOUT
+      - AUTHREQID_TO_TOKEN
+      - DELETE_ACCOUNT_ERROR
+      - CLIENT_REGISTER
+      - IDENTITY_PROVIDER_LINK_ACCOUNT
+      - USER_DISABLED_BY_TEMPORARY_LOCKOUT
+      - UPDATE_PASSWORD
+      - DELETE_ACCOUNT
+      - FEDERATED_IDENTITY_LINK_ERROR
+      - CLIENT_DELETE
+      - IDENTITY_PROVIDER_FIRST_LOGIN
+      - VERIFY_EMAIL
+      - CLIENT_DELETE_ERROR
+      - CLIENT_LOGIN_ERROR
+      - RESTART_AUTHENTICATION_ERROR
+      - REMOVE_FEDERATED_IDENTITY_ERROR
+      - EXECUTE_ACTIONS
+      - TOKEN_EXCHANGE_ERROR
+      - PERMISSION_TOKEN
+      - FEDERATED_IDENTITY_OVERRIDE_LINK
+      - SEND_IDENTITY_PROVIDER_LINK_ERROR
+      - UPDATE_CREDENTIAL_ERROR
+      - EXECUTE_ACTION_TOKEN_ERROR
+      - SEND_VERIFY_EMAIL
+      - OAUTH2_EXTENSION_GRANT_ERROR
+      - OAUTH2_DEVICE_AUTH
+      - EXECUTE_ACTIONS_ERROR
+      - REMOVE_FEDERATED_IDENTITY
+      - OAUTH2_DEVICE_CODE_TO_TOKEN
+      - IDENTITY_PROVIDER_POST_LOGIN
+      - IDENTITY_PROVIDER_LINK_ACCOUNT_ERROR
+      - FEDERATED_IDENTITY_OVERRIDE_LINK_ERROR
+      - UPDATE_EMAIL
+      - OAUTH2_DEVICE_VERIFY_USER_CODE_ERROR
+      - REGISTER_ERROR
+      - REVOKE_GRANT_ERROR
+      - LOGOUT_ERROR
+      - UPDATE_EMAIL_ERROR
+      - EXECUTE_ACTION_TOKEN
+      - CLIENT_UPDATE_ERROR
+      - UPDATE_PROFILE
+      - AUTHREQID_TO_TOKEN_ERROR
+      - INVITE_ORG_ERROR
+      - FEDERATED_IDENTITY_LINK
+      - CLIENT_REGISTER_ERROR
+      - INVITE_ORG
+      - SEND_VERIFY_EMAIL_ERROR
+      - SEND_IDENTITY_PROVIDER_LINK
+      - RESET_PASSWORD
+      - CLIENT_INITIATED_ACCOUNT_LINKING_ERROR
+      - OAUTH2_DEVICE_AUTH_ERROR
+      - REMOVE_CREDENTIAL
+      - UPDATE_CONSENT
+      - REMOVE_TOTP_ERROR
+      - VERIFY_EMAIL_ERROR
+      - SEND_RESET_PASSWORD_ERROR
+      - CLIENT_UPDATE
+      - IDENTITY_PROVIDER_POST_LOGIN_ERROR
+      - CUSTOM_REQUIRED_ACTION_ERROR
+      - UPDATE_TOTP_ERROR
+      - CODE_TO_TOKEN
+      - VERIFY_PROFILE
+      - GRANT_CONSENT_ERROR
+      - IDENTITY_PROVIDER_FIRST_LOGIN_ERROR
+    adminEventsEnabled: true
+    adminEventsDetailsEnabled: false
+    identityProviders: [ ]
+    identityProviderMappers: [ ]
+    components:
+      org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy:
+        - id: c661e269-73da-4210-be3d-98819db23f44
+          name: Consent Required
+          providerId: consent-required
+          subType: anonymous
+          subComponents: { }
+          config: { }
+        - id: 5af129f5-5023-44d1-9b69-25ad8dc4fa3b
+          name: Allowed Protocol Mapper Types
+          providerId: allowed-protocol-mappers
+          subType: authenticated
+          subComponents: { }
+          config:
+            allowed-protocol-mapper-types:
+              - oidc-sha256-pairwise-sub-mapper
+              - saml-user-attribute-mapper
+              - oidc-address-mapper
+              - oidc-full-name-mapper
+              - oidc-usermodel-property-mapper
+              - oidc-usermodel-attribute-mapper
+              - saml-user-property-mapper
+              - saml-role-list-mapper
+        - id: 380a4d34-7b35-462d-8f6c-3818300cf043
+          name: Max Clients Limit
+          providerId: max-clients
+          subType: anonymous
+          subComponents: { }
+          config:
+            max-clients:
+              - '200'
+        - id: 69445bc4-5474-4137-aafb-726261ec84f8
+          name: Allowed Protocol Mapper Types
+          providerId: allowed-protocol-mappers
+          subType: anonymous
+          subComponents: { }
+          config:
+            allowed-protocol-mapper-types:
+              - oidc-address-mapper
+              - saml-user-attribute-mapper
+              - saml-user-property-mapper
+              - saml-role-list-mapper
+              - oidc-usermodel-attribute-mapper
+              - oidc-full-name-mapper
+              - oidc-usermodel-property-mapper
+              - oidc-sha256-pairwise-sub-mapper
+        - id: a70b02f6-d3a6-4508-9c4a-e818a0f9bd08
+          name: Trusted Hosts
+          providerId: trusted-hosts
+          subType: anonymous
+          subComponents: { }
+          config:
+            host-sending-registration-request-must-match:
+              - 'true'
+            client-uris-must-match:
+              - 'true'
+        - id: 6b3790b0-2f5b-4f29-a14c-cd88fc0f07bd
+          name: Allowed Client Scopes
+          providerId: allowed-client-templates
+          subType: anonymous
+          subComponents: { }
+          config:
+            allow-default-scopes:
+              - 'true'
+        - id: cd68c32b-bff2-475a-a0c0-16ccdc843c07
+          name: Allowed Client Scopes
+          providerId: allowed-client-templates
+          subType: authenticated
+          subComponents: { }
+          config:
+            allow-default-scopes:
+              - 'true'
+        - id: e68e3296-1885-4d2c-8f29-212d30a4004f
+          name: Full Scope Disabled
+          providerId: scope
+          subType: anonymous
+          subComponents: { }
+          config: { }
+      org.keycloak.keys.KeyProvider:
+        - id: d370e81c-df2e-4c0d-b43e-3d0ac23dc977
+          name: rsa-enc-generated
+          providerId: rsa-enc-generated
+          subComponents: { }
+          config:
+            priority:
+              - '100'
+            algorithm:
+              - RSA-OAEP
+        - id: 7392e657-3b8c-4cb3-80d5-8d035a8b447b
+          name: rsa-generated
+          providerId: rsa-generated
+          subComponents: { }
+          config:
+            priority:
+              - '100'
+        - id: 32f67d7c-47af-44cb-99e1-7d4393e59eac
+          name: aes-generated
+          providerId: aes-generated
+          subComponents: { }
+          config:
+            priority:
+              - '100'
+        - id: adb98696-c91d-4fac-9e65-45018e52a998
+          name: hmac-generated-hs512
+          providerId: hmac-generated
+          subComponents: { }
+          config:
+            priority:
+              - '100'
+            algorithm:
+              - HS512
+    internationalizationEnabled: false
+    supportedLocales: [ ]
+    authenticationFlows:
+      - id: 6ba06a3d-7ba0-4950-a28e-028a7052fb3b
+        alias: Account verification options
+        description: Method with which to verity the existing account
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: idp-email-verification
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: ALTERNATIVE
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: Verify Existing Account by Re-authentication
+            userSetupAllowed: false
+      - id: 2ecced46-3e2e-448d-b83b-52041ba2ec8c
+        alias: Browser - Conditional OTP
+        description: Flow to determine if the OTP is required for the authentication
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: auth-otp-form
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: 9b73fea4-969c-4ff4-8037-cc822246e744
+        alias: Browser - Conditional Organization
+        description: Flow to determine if the organization identity-first login is to be used
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: organization
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: c1c538b4-78af-4e0e-a6f4-0c4f318dbdd1
+        alias: Direct Grant - Conditional OTP
+        description: Flow to determine if the OTP is required for the authentication
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: direct-grant-validate-otp
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: ee07b40a-b2e9-433c-82d0-39c9e2670cc4
+        alias: First Broker Login - Conditional Organization
+        description: >-
+          Flow to determine if the authenticator that adds organization members is
+          to be used
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: idp-add-organization-member
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: c41142a2-38af-4d2f-978b-7768ca4c59e0
+        alias: First broker login - Conditional OTP
+        description: Flow to determine if the OTP is required for the authentication
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: auth-otp-form
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: 647860aa-9bce-4e30-befc-4c9bbf8e0704
+        alias: Handle Existing Account
+        description: >-
+          Handle what to do if there is existing account with same email/username
+          like authenticated identity provider
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: idp-confirm-link
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: Account verification options
+            userSetupAllowed: false
+      - id: 5e9be3ec-73b1-415d-8c30-95c1d7886ed8
+        alias: Organization
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 10
+            autheticatorFlow: true
+            flowAlias: Browser - Conditional Organization
+            userSetupAllowed: false
+      - id: aee99f46-1e39-496a-8135-03efe0cf3154
+        alias: Reset - Conditional OTP
+        description: >-
+          Flow to determine if the OTP should be reset or not. Set to REQUIRED to
+          force.
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: conditional-user-configured
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: reset-otp
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: d95b5ab1-a87d-4a1a-b26d-0a596608f639
+        alias: User creation or linking
+        description: Flow for the existing/non-existing user alternatives
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticatorConfig: create unique user config
+            authenticator: idp-create-user-if-unique
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: ALTERNATIVE
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: Handle Existing Account
+            userSetupAllowed: false
+      - id: 9adac904-8d6b-4f64-9236-7f45dc3411ac
+        alias: Verify Existing Account by Re-authentication
+        description: Reauthentication of existing account
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: idp-username-password-form
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: First broker login - Conditional OTP
+            userSetupAllowed: false
+      - id: b7127dfb-97f6-4426-bbfc-18ea3987fc78
+        alias: browser
+        description: Browser based authentication
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: auth-cookie
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: auth-spnego
+            authenticatorFlow: false
+            requirement: DISABLED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: identity-provider-redirector
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 25
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: ALTERNATIVE
+            priority: 26
+            autheticatorFlow: true
+            flowAlias: Organization
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: ALTERNATIVE
+            priority: 30
+            autheticatorFlow: true
+            flowAlias: forms
+            userSetupAllowed: false
+      - id: 24b8d58a-7802-4566-9cfa-fe5f678c9046
+        alias: clients
+        description: Base authentication for clients
+        providerId: client-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: client-secret
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: client-jwt
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: client-secret-jwt
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 30
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: client-x509
+            authenticatorFlow: false
+            requirement: ALTERNATIVE
+            priority: 40
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: d6254750-d033-4461-8ba5-e9c52018c9cb
+        alias: direct grant
+        description: OpenID Connect Resource Owner Grant
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: direct-grant-validate-username
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: direct-grant-validate-password
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 30
+            autheticatorFlow: true
+            flowAlias: Direct Grant - Conditional OTP
+            userSetupAllowed: false
+      - id: d62d5709-4ecd-4101-a43b-7d858b756c55
+        alias: docker auth
+        description: Used by Docker clients to authenticate against the IDP
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: docker-http-basic-authenticator
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: e0431680-7212-4f82-b751-68beaa0f1661
+        alias: first broker login
+        description: >-
+          Actions taken after first broker login with identity provider account,
+          which is not yet linked to any Keycloak account
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticatorConfig: review profile config
+            authenticator: idp-review-profile
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: User creation or linking
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 50
+            autheticatorFlow: true
+            flowAlias: First Broker Login - Conditional Organization
+            userSetupAllowed: false
+      - id: 3fd11f7f-c5b0-4cf2-b47e-5df53eaaf408
+        alias: forms
+        description: 'Username, password, otp and other auth forms.'
+        providerId: basic-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: auth-username-password-form
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 20
+            autheticatorFlow: true
+            flowAlias: Browser - Conditional OTP
+            userSetupAllowed: false
+      - id: 47387f51-b60c-4427-81f5-916debb53480
+        alias: registration
+        description: Registration flow
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: registration-page-form
+            authenticatorFlow: true
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: true
+            flowAlias: registration form
+            userSetupAllowed: false
+      - id: 4a1b6aab-58de-45f4-a4c3-c9e512cc48e2
+        alias: registration form
+        description: Registration form
+        providerId: form-flow
+        topLevel: false
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: registration-user-creation
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: registration-password-action
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 50
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: registration-recaptcha-action
+            authenticatorFlow: false
+            requirement: DISABLED
+            priority: 60
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: registration-terms-and-conditions
+            authenticatorFlow: false
+            requirement: DISABLED
+            priority: 70
+            autheticatorFlow: false
+            userSetupAllowed: false
+      - id: 4fa313f0-8aff-4738-aaea-f40d46d2b68d
+        alias: reset credentials
+        description: Reset credentials for a user if they forgot their password or something
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: reset-credentials-choose-user
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: reset-credential-email
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 20
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticator: reset-password
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 30
+            autheticatorFlow: false
+            userSetupAllowed: false
+          - authenticatorFlow: true
+            requirement: CONDITIONAL
+            priority: 40
+            autheticatorFlow: true
+            flowAlias: Reset - Conditional OTP
+            userSetupAllowed: false
+      - id: 60f090d0-46e7-4901-9099-887ad0319d27
+        alias: saml ecp
+        description: SAML ECP Profile Authentication Flow
+        providerId: basic-flow
+        topLevel: true
+        builtIn: true
+        authenticationExecutions:
+          - authenticator: http-basic-authenticator
+            authenticatorFlow: false
+            requirement: REQUIRED
+            priority: 10
+            autheticatorFlow: false
+            userSetupAllowed: false
+    authenticatorConfig:
+      - id: 7c15da53-a19b-406b-8d5a-46182a37576a
+        alias: create unique user config
+        config:
+          require.password.update.after.registration: 'false'
+      - id: 965994d6-c37a-4509-bf99-2c1f1d298430
+        alias: review profile config
+        config:
+          update.profile.on.first.login: missing
+    requiredActions:
+      - alias: CONFIGURE_TOTP
+        name: Configure OTP
+        providerId: CONFIGURE_TOTP
+        enabled: true
+        defaultAction: false
+        priority: 10
+        config: { }
+      - alias: TERMS_AND_CONDITIONS
+        name: Terms and Conditions
+        providerId: TERMS_AND_CONDITIONS
+        enabled: false
+        defaultAction: false
+        priority: 20
+        config: { }
+      - alias: UPDATE_PASSWORD
+        name: Update Password
+        providerId: UPDATE_PASSWORD
+        enabled: true
+        defaultAction: false
+        priority: 30
+        config: { }
+      - alias: UPDATE_PROFILE
+        name: Update Profile
+        providerId: UPDATE_PROFILE
+        enabled: true
+        defaultAction: false
+        priority: 40
+        config: { }
+      - alias: VERIFY_EMAIL
+        name: Verify Email
+        providerId: VERIFY_EMAIL
+        enabled: true
+        defaultAction: false
+        priority: 50
+        config: { }
+      - alias: delete_account
+        name: Delete Account
+        providerId: delete_account
+        enabled: false
+        defaultAction: false
+        priority: 60
+        config: { }
+      - alias: webauthn-register
+        name: Webauthn Register
+        providerId: webauthn-register
+        enabled: true
+        defaultAction: false
+        priority: 70
+        config: { }
+      - alias: webauthn-register-passwordless
+        name: Webauthn Register Passwordless
+        providerId: webauthn-register-passwordless
+        enabled: true
+        defaultAction: false
+        priority: 80
+        config: { }
+      - alias: VERIFY_PROFILE
+        name: Verify Profile
+        providerId: VERIFY_PROFILE
+        enabled: true
+        defaultAction: false
+        priority: 90
+        config: { }
+      - alias: delete_credential
+        name: Delete Credential
+        providerId: delete_credential
+        enabled: true
+        defaultAction: false
+        priority: 100
+        config: { }
+      - alias: update_user_locale
+        name: Update User Locale
+        providerId: update_user_locale
+        enabled: true
+        defaultAction: false
+        priority: 1000
+        config: { }
+    browserFlow: browser
+    registrationFlow: registration
+    directGrantFlow: direct grant
+    resetCredentialsFlow: reset credentials
+    clientAuthenticationFlow: clients
+    dockerAuthenticationFlow: docker auth
+    firstBrokerLoginFlow: first broker login
+    attributes:
+      cibaBackchannelTokenDeliveryMode: poll
+      cibaAuthRequestedUserHint: login_hint
+      oauth2DevicePollingInterval: '5'
+      clientOfflineSessionMaxLifespan: '0'
+      clientSessionIdleTimeout: '0'
+      clientOfflineSessionIdleTimeout: '0'
+      cibaInterval: '5'
+      realmReusableOtpCode: 'false'
+      cibaExpiresIn: '120'
+      oauth2DeviceCodeLifespan: '600'
+      parRequestUriLifespan: '60'
+      clientSessionMaxLifespan: '0'
+      adminEventsExpiration: '172800'
+    keycloakVersion: 26.2.4.redhat-00002
+    userManagedAccessAllowed: false
+    organizationsEnabled: false
+    verifiableCredentialsEnabled: false
+    adminPermissionsEnabled: false
+    clientProfiles:
+      profiles: [ ]
+    clientPolicies:
+      policies: [ ]
